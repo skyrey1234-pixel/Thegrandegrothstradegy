@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Grande Growth Strategy - Updated Pitch Deck</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            line-height: 1.6;
+        }
+        
+        .presentation {
+            max-width: 1200px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 40px;
+            position: relative;
+        }
+        
+        .slide.active {
+            display: flex;
+        }
+        
+        .slide-content {
+            max-width: 900px;
+            width: 100%;
+        }
+        
+        /* Slide Styles */
+        .slide-1 {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+            text-align: center;
+        }
+        
+        .slide-2, .slide-4, .slide-6, .slide-8, .slide-10, .slide-12 {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+        
+        .slide-3, .slide-5, .slide-7, .slide-9, .slide-11, .slide-13 {
+            background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+        }
+        
+        .slide-14 {
+            background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+        
+        p, li {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            opacity: 0.95;
+        }
+        
+        .subtitle {
+            font-size: 1.4em;
+            opacity: 0.9;
+            margin-top: 20px;
+        }
+        
+        .highlight {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        
+        .stat-box {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 4px solid #00d4ff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .chart-container {
+            position: relative;
+            height: 400px;
+            margin: 30px 0;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        
+        li {
+            margin-bottom: 12px;
+        }
+        
+        .cta-button {
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #000;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .navigation {
+            position: fixed;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+        }
+        
+        .nav-button {
+            background: #00d4ff;
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-button:hover {
+            background: #00a3cc;
+            transform: scale(1.05);
+        }
+        
+        .nav-button:disabled {
+            background: #666;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .slide-counter {
+            position: fixed;
+            top: 20px;
+            right: 30px;
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+        
+        .contact-box {
+            background: rgba(0, 212, 255, 0.15);
+            border: 2px solid #00d4ff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .contact-box p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+        
+        .contact-label {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+        
+        .metric {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 8px;
+            margin: 10px;
+        }
+        
+        .metric-value {
+            font-size: 2.5em;
+            color: #00d4ff;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .metric-label {
+            font-size: 1em;
+            opacity: 0.8;
+        }
+        
+        .phase-box {
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid #00d4ff;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+        
+        .phase-box h3 {
+            color: #00d4ff;
+            margin-bottom: 10px;
+        }
+        
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border-left: 4px solid #ff6b6b;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .success-box {
+            background: rgba(76, 175, 80, 0.1);
+            border-left: 4px solid #4CAF50;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.8em; }
+            .grid-2 { grid-template-columns: 1fr; }
+            .slide { padding: 40px 20px; }
+            p, li { font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">14</span>
+    </div>
+    
+    <!-- SLIDE 1: Title Slide -->
+    <div class="slide slide-1 active">
+        <div class="slide-content">
+            <h1>The Grande</h1>
+            <p class="subtitle">Complete Growth & Optimization Strategy</p>
+            <p style="margin-top: 40px; font-size: 1.2em; opacity: 0.85;">Quick Wins + Long-Term Revenue Maximization</p>
+            <p style="margin-top: 60px; opacity: 0.7; font-size: 1em;">Presented by Skyrey Trinidad</p>
+            <p style="opacity: 0.7; font-size: 0.95em;">AI Optimization Consultant & Growth Manager</p>
+        </div>
+    </div>
+    
+    <!-- SLIDE 2: The Immediate Problem -->
+    <div class="slide slide-2">
+        <div class="slide-content">
+            <h2>Your Website is Costing You Money</h2>
+            <p style="margin-top: 30px; font-size: 1.2em; text-align: center;">Right now, customers are finding you and leaving because your website doesn't close the sale.</p>
+            
+            <div class="warning-box">
+                <h3 style="color: #ff6b6b;">Critical Website Gaps:</h3>
+                <ul>
+                    <li><span class="highlight" style="color: #ff6b6b;">No Cocktail Menu or Pricing</span> — Customers can't see what they're ordering</li>
+                    <li><span class="highlight" style="color: #ff6b6b;">No Photo Gallery</span> — Zero visual proof of your vibe</li>
+                    <li><span class="highlight" style="color: #ff6b6b;">No Review Widgets</span> — Social proof is invisible</li>
+                    <li><span class="highlight" style="color: #ff6b6b;">Social Media Not Linked</span> — People can't find your Instagram or TikTok</li>
+                    <li><span class="highlight" style="color: #ff6b6b;">No Event Details</span> — Vinyl Night and Jazz listed, but no times or descriptions</li>
+                    <li><span class="highlight" style="color: #ff6b6b;">No Reservation System</span> — Can't book a table online</li>
+                </ul>
+            </div>
+            
+            <div class="stat-box" style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 1.3em;">Conservative estimate: <span class="highlight">25-30% of walk-in conversions are lost because your website doesn't sell the experience.</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 3: Website Audit Before & After -->
+    <div class="slide slide-3">
+        <div class="slide-content">
+            <h2>What We Fix in Week 1</h2>
+            
+            <div class="grid-2" style="margin-top: 30px;">
+                <div style="background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">BEFORE (Current)</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li>No menu online</li>
+                        <li>2-3 generic photos</li>
+                        <li>No review widget</li>
+                        <li>No social links</li>
+                        <li>Event times unclear</li>
+                        <li>Email signup (no incentive)</li>
+                    </ul>
+                </div>
+                
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 8px;">
+                    <h3 style="color: #4CAF50; margin-bottom: 15px;">AFTER (Optimized)</h3>
+                    <ul style="font-size: 0.95em;">
+                        <li>Full cocktail menu + pricing</li>
+                        <li>20+ professional photos</li>
+                        <li>Google & Yelp reviews widget</li>
+                        <li>Instagram & TikTok linked</li>
+                        <li>Event calendar with times</li>
+                        <li>Email signup with "15% Birthday Discount"</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="success-box" style="margin-top: 30px;">
+                <p><span class="highlight" style="color: #4CAF50;">Result: 25-30% increase in web-to-walk-in conversions</span> (Based on hospitality industry benchmarks)</p>
+                <p style="margin-top: 10px; font-size: 1em;">If you're doing 60 customers/night currently, that's an extra 15-18 customers/night from website fixes alone.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 4: Revenue Impact of Website Fix -->
+    <div class="slide slide-4">
+        <div class="slide-content">
+            <h2>Phase 1: Website Impact (Week 1-2)</h2>
+            
+            <div class="grid-2" style="margin-top: 30px;">
+                <div class="metric">
+                    <div class="metric-value">+15-18</div>
+                    <div class="metric-label">New Customers/Night</div>
+                    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.7;">From website conversions alone</p>
+                </div>
+                
+                <div class="metric">
+                    <div class="metric-value">+$4.5K</div>
+                    <div class="metric-label">Monthly Revenue</div>
+                    <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.7;">15 customers × $15 avg spend × 30 days</p>
+                </div>
+            </div>
+            
+            <div class="stat-box" style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 1.2em;">This is <span class="highlight">before we even touch the bigger revenue strategies.</span></p>
+                <p style="margin-top: 15px; font-size: 1em; opacity: 0.85;">Your website fix alone covers 2+ months of my service fee.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 5: Larger Revenue Opportunities -->
+    <div class="slide slide-5">
+        <div class="slide-content">
+            <h2>Phase 2: Revenue Streams (Week 3+)</h2>
+            <p style="text-align: center; margin-bottom: 30px; opacity: 0.85;">After the website is live, we activate four additional revenue channels.</p>
+            
+            <div class="grid-2">
+                <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px;">
+                    <h3 style="font-size: 1.4em;">Wait-List Redirect Program</h3>
+                    <p style="font-size: 1.3em; color: #00d4ff; margin: 15px 0;">+$12K–18K/month</p>
+                    <p style="font-size: 0.95em;">Door staff → nearby restaurants (Coop 303, Flying Iguana). Offer 20% off drinks. Capture 40–60 customers/night.</p>
+                </div>
+                
+                <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px;">
+                    <h3 style="font-size: 1.4em;">Ghost Kitchen Food</h3>
+                    <p style="font-size: 1.3em; color: #00d4ff; margin: 15px 0;">+$8K–12K/month</p>
+                    <p style="font-size: 0.95em;">Partner with local vendor for appetizers/small plates. 30% of customers order = 45% margin boost.</p>
+                </div>
+                
+                <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px;">
+                    <h3 style="font-size: 1.4em;">Digital Marketing & Social</h3>
+                    <p style="font-size: 1.3em; color: #00d4ff; margin: 15px 0;">+$6K–10K/month</p>
+                    <p style="font-size: 0.95em;">Instagram/TikTok ads targeting 25–45 demographic. 25–35 new repeat customers/week.</p>
+                </div>
+                
+                <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px;">
+                    <h3 style="font-size: 1.4em;">Daytime Activations</h3>
+                    <p style="font-size: 1.3em; color: #00d4ff; margin: 15px 0;">+$4K–8K/month</p>
+                    <p style="font-size: 0.95em;">Yoga, gaming tournaments, networking hours. 2–3 daytime events/week with partner businesses.</p>
+                </div>
+            </div>
+            
+            <div class="stat-box" style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 1.3em;"><span class="highlight">TOTAL MONTHLY OPPORTUNITY: $30K–48K in new revenue</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 6: Full Strategy Timeline -->
+    <div class="slide slide-6">
+        <div class="slide-content">
+            <h2>Your Execution Timeline</h2>
+            
+            <div class="phase-box">
+                <h3>PHASE 1: Week 1-2 (Website & Digital Foundation)</h3>
+                <ul style="font-size: 0.95em;">
+                    <li>Upload cocktail menu with pricing</li>
+                    <li>Add 20+ professional venue photos</li>
+                    <li>Add Google & Yelp review widgets</li>
+                    <li>Link Instagram & TikTok</li>
+                    <li>Create event pages with times/descriptions</li>
+                    <li>Set up email automation (birthday discount flow)</li>
+                    <li><span class="highlight">Expected impact: +$4.5K/month</span></li>
+                </ul>
+            </div>
+            
+            <div class="phase-box">
+                <h3>PHASE 2: Week 3-4 (Partnerships & Activation)</h3>
+                <ul style="font-size: 0.95em;">
+                    <li>Deploy wait-list ambassador program (door staff training)</li>
+                    <li>Negotiate ghost kitchen food partnership</li>
+                    <li>Launch first daytime event (yoga or gaming)</li>
+                    <li>Begin Instagram/TikTok consistent posting</li>
+                    <li><span class="highlight">Expected impact: +$8K–12K/month (new)</span></li>
+                </ul>
+            </div>
+            
+            <div class="phase-box">
+                <h3>PHASE 3: Month 2-3 (Optimization & Scaling)</h3>
+                <ul style="font-size: 0.95em;">
+                    <li>Run paid digital ads ($500-800/week budget)</li>
+                    <li>Scale daytime events to 2-3/week</li>
+                    <li>Optimize wait-list program based on data</li>
+                    <li>Monthly performance reporting</li>
+                    <li><span class="highlight">Expected impact: Full +$30K–48K/month realized</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 7: Year 1 Revenue Projection -->
+    <div class="slide slide-7">
+        <div class="slide-content">
+            <h2>12-Month Revenue Projection</h2>
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+            <p style="text-align: center; margin-top: 20px; opacity: 0.85; font-size: 0.95em;">Conservative scenario includes website fixes + wait-list + digital. Aggressive includes all strategies at full optimization.</p>
+        </div>
+    </div>
+    
+    <!-- SLIDE 8: Conservative Scenario -->
+    <div class="slide slide-8">
+        <div class="slide-content">
+            <h2>Conservative Scenario (Year 1)</h2>
+            <p style="text-align: center; margin-bottom: 30px; opacity: 0.85;">Website Fixes + Wait-List Program + Digital Marketing</p>
+            
+            <ul style="margin-top: 20px; font-size: 1em;">
+                <li><span class="highlight">Month 1-2:</span> Website live (+$4.5K), Ambassador program training, initial social content</li>
+                <li><span class="highlight">Month 3-6:</span> Wait-list driving 30–40 customers/night, Instagram followers 2,000+, total revenue $57K–63K/month</li>
+                <li><span class="highlight">Month 7-12:</span> Full automation, organic repeat visits, stable $62K–68K/month</li>
+                <li style="margin-top: 20px;"><span class="highlight" style="color: #4CAF50; font-size: 1.2em;">Year 1 Total: +$180K–250K in incremental revenue</span></li>
+            </ul>
+            
+            <div class="success-box" style="margin-top: 30px;">
+                <p><span class="highlight">Cost:</span> $24K (12 months × $2K)</p>
+                <p><span class="highlight">ROI: 750–940%</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 9: Aggressive Scenario -->
+    <div class="slide slide-9">
+        <div class="slide-content">
+            <h2>Aggressive Scenario (Year 1)</h2>
+            <p style="text-align: center; margin-bottom: 30px; opacity: 0.85;">All Revenue Streams + Full Optimization</p>
+            
+            <ul style="margin-top: 20px; font-size: 1em;">
+                <li><span class="highlight">Month 1-2:</span> Website live, launch ghost kitchen food partnership, all partnerships in motion ($48K revenue)</li>
+                <li><span class="highlight">Month 3-6:</span> Food +$8K–12K/month, wait-list 60–80 new customers/night, 2–3 private events/month, revenue $68K–78K</li>
+                <li><span class="highlight">Month 7-12:</span> Capacity near max (110–120/night weekends, 70–80 weekdays), all systems optimized, revenue $80K–95K/month</li>
+                <li style="margin-top: 20px;"><span class="highlight" style="color: #4CAF50; font-size: 1.2em;">Year 1 Total: +$320K–420K in incremental revenue</span></li>
+            </ul>
+            
+            <div class="success-box" style="margin-top: 30px;">
+                <p><span class="highlight">Cost:</span> $24K (12 months × $2K)</p>
+                <p><span class="highlight">ROI: 1,233–1,650%</span></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 10: My Role -->
+    <div class="slide slide-10">
+        <div class="slide-content">
+            <h2>What I Do For $2,000/Month</h2>
+            
+            <ul style="margin-top: 30px;">
+                <li><span class="highlight">Week 1:</span> Audit website, upload menu/photos, fix broken links, add review widgets, claim Yelp page</li>
+                <li><span class="highlight">Week 2-4:</span> Social media setup, email automation, negotiate partnerships, train door staff</li>
+                <li><span class="highlight">Ongoing:</span> Post to Instagram/TikTok 4–5x/week, manage Facebook, run paid ads, track KPIs, monthly reporting</li>
+                <li><span class="highlight">Partnership Management:</span> Negotiate restaurant agreements, ghost kitchen setup, event coordination</li>
+                <li><span class="highlight">Analytics:</span> Monthly reports showing customer acquisition, revenue lift, ROI per initiative</li>
+            </ul>
+            
+            <div class="stat-box" style="margin-top: 40px;">
+                <p style="font-size: 1.1em;"><span class="highlight">Bottom line:</span> I'm your fractional CMO + Operations Manager. You get professional-level execution without hiring someone full-time at $4–6K+/month.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 11: ROI Breakdown -->
+    <div class="slide slide-11">
+        <div class="slide-content">
+            <h2>Your ROI at a Glance</h2>
+            
+            <div class="grid-2" style="margin-top: 30px;">
+                <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px; text-align: center;">
+                    <p style="font-size: 0.95em; opacity: 0.8; margin-bottom: 10px;">PAYBACK PERIOD</p>
+                    <div class="metric-value" style="font-size: 2em;">1 Month</div>
+                    <p style="font-size: 0.9em; opacity: 0.8;">Website fixes alone generate +$4.5K/month</p>
+                </div>
+                
+                <div style="background: rgba(0, 212, 255, 0.1); padding: 20px; border-radius: 8px; text-align: center;">
+                    <p style="font-size: 0.95em; opacity: 0.8; margin-bottom: 10px;">MONTH 3 RETURN</p>
+                    <div class="metric-value" style="font-size: 2em;">8-10x</div>
+                    <p style="font-size: 0.9em; opacity: 0.8;">For every $1 you pay, you've made $8–10</p>
+                </div>
+            </div>
+            
+            <div class="stat-box" style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 1.2em;">The website fix is immediate. The larger revenue streams scale over 90 days.</p>
+                <p style="margin-top: 15px; font-size: 1em;">By Month 3, you're running at full optimization.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 12: First Month Deliverables -->
+    <div class="slide slide-12">
+        <div class="slide-content">
+            <h2>Month 1 Deliverables (Non-Negotiable)</h2>
+            
+            <h3 style="color: #fff; margin-top: 30px;">Week 1:</h3>
+            <ul style="font-size: 0.95em;">
+                <li>Website audit complete; menu uploaded with pricing</li>
+                <li>20+ professional photos added to site</li>
+                <li>Google Maps embedded; Yelp page claimed & optimized</li>
+                <li>Review widgets live on homepage</li>
+            </ul>
+            
+            <h3 style="color: #fff; margin-top: 25px;">Week 2-4:</h3>
+            <ul style="font-size: 0.95em;">
+                <li>Instagram & TikTok strategy + content calendar (4 weeks planned)</li>
+                <li>Email automation set up (birthday discount flow)</li>
+                <li>Door staff trained on waitlist redirect script</li>
+                <li>5 restaurants identified for partnerships</li>
+                <li>Ghost kitchen vendor research + pitch</li>
+            </ul>
+            
+            <div class="stat-box" style="margin-top: 30px; text-align: center;">
+                <p><span class="highlight">Performance Guarantee:</span> If we don't hit baseline metrics by end of Month 1, Month 2 is free.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 13: Why This Matters -->
+    <div class="slide slide-13">
+        <div class="slide-content">
+            <h2>The Real Opportunity</h2>
+            
+            <div class="stat-box">
+                <p><span class="highlight">Your venue is already full on Friday–Saturday nights.</span> But you're leaving 40–60% of capacity empty Monday–Thursday.</p>
+            </div>
+            
+            <div class="stat-box">
+                <p><span class="highlight">Your concept is perfect.</span> You've built something people want. The problem is awareness and foot traffic during off-peak hours.</p>
+            </div>
+            
+            <div class="stat-box">
+                <p><span class="highlight">The wait-list crowds are literally next door.</span> Coop 303, Flying Iguana—hundreds of people waiting outside who would pay for a cocktail right now. We just need to tell them you exist.</p>
+            </div>
+            
+            <div class="success-box" style="margin-top: 30px;">
+                <p style="font-size: 1.2em;">This isn't theory. This is revenue you're already losing every single night.</p>
+                <p style="margin-top: 15px; font-size: 1em;">You don't need a new business model. You need better execution on the one you already have.</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- SLIDE 14: Contact & CTA -->
+    <div class="slide slide-14">
+        <div class="slide-content">
+            <h1 style="font-size: 3em; margin-bottom: 40px;">Let's Start This Week</h1>
+            
+            <div class="contact-box">
+                <p><span class="contact-label">Name:</span> Skyrey Trinidad</p>
+                <p><span class="contact-label">Email:</span> skry@gmail.com</p>
+                <p><span class="contact-label">Phone:</span> (904) 923-8122</p>
+                <p style="margin-top: 20px; font-size: 1em; opacity: 0.85;">I'm available for a 30-minute call this week to walk through the strategy and answer any questions.</p>
+            </div>
+            
+            <button class="cta-button" onclick="sendEmail()">Let's Talk This Week</button>
+            
+            <p style="margin-top: 40px; font-size: 0.95em; opacity: 0.7;">The website fixes happen in Week 1. The revenue comes in Weeks 3-12. Let's get started.</p>
+        </div>
+    </div>
+    
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-button" id="prev-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-button" id="next-btn" onclick="nextSlide()">Next →</button>
+    </div>
+    
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 14;
+        
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            
+            if (n > totalSlides) { currentSlide = totalSlides; }
+            if (n < 1) { currentSlide = 1; }
+            
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide;
+            document.getElementById('prev-btn').disabled = currentSlide === 1;
+            document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+            
+            // Initialize chart on slide 7
+            if (currentSlide === 7) {
+                setTimeout(initChart, 100);
+            }
+        }
+        
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+        
+        function previousSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') previousSlide();
+        });
+        
+        function initChart() {
+            const ctx = document.getElementById('revenueChart');
+            if (!ctx || ctx.revenueChartInstance) return;
+            
+            ctx.revenueChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Current', 'Month 1', 'Month 2', 'Month 3', 'Month 4', 'Month 5', 'Month 6', 'Month 9', 'Month 12'],
+                    datasets: [
+                        {
+                            label: 'Conservative Scenario',
+                            data: [45, 49.5, 51, 56, 60, 62, 65, 67, 68],
+                            borderColor: '#00d4ff',
+                            backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#00d4ff'
+                        },
+                        {
+                            label: 'Aggressive Scenario',
+                            data: [45, 48, 56, 70, 78, 82, 85, 90, 95],
+                            borderColor: '#ff6b6b',
+                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                            borderWidth: 3,
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 5,
+                            pointBackgroundColor: '#ff6b6b'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff',
+                                font: { size: 14 }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#fff',
+                                callback: function(value) {
+                                    return '$' + value + 'K';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function sendEmail() {
+            const subject = encodeURIComponent("The Grande Growth Strategy - Let's Talk");
+            const body = encodeURIComponent("Hi Skyrey,\n\nI'm interested in discussing the growth strategy proposal. I'd like to schedule a call at your earliest convenience.\n\nThanks");
+            window.location.href = `mailto:skry@gmail.com?subject=${subject}&body=${body}`;
+        }
+        
+        // Initialize
+        showSlide(currentSlide);
+    </script>
+</body>
+</html>

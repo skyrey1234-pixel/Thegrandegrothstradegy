@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Grande Growth Strategy App</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>The Grande Growth Strategy</h1>
+        <p class="subtitle">Interactive app view of the complete strategy package</p>
+      </div>
+      <label class="search-wrap" for="search-input">
+        <span>Search docs</span>
+        <input id="search-input" type="search" placeholder="Type a keyword..." />
+      </label>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar">
+        <h2>Sections</h2>
+        <nav id="section-nav" class="nav-list"></nav>
+        <div id="search-results" class="search-results hidden"></div>
+      </aside>
+
+      <main class="content">
+        <section class="kpi-row">
+          <article class="kpi-card">
+            <h3>Current Revenue</h3>
+            <p>$45K / month</p>
+          </article>
+          <article class="kpi-card">
+            <h3>Target Revenue</h3>
+            <p>$75K–95K / month</p>
+          </article>
+          <article class="kpi-card">
+            <h3>Estimated ROI</h3>
+            <p>750%–1,650%</p>
+          </article>
+        </section>
+
+        <section class="doc-panel">
+          <div class="doc-header">
+            <h2 id="doc-title">Loading…</h2>
+            <a id="doc-source-link" href="#" target="_blank" rel="noreferrer">Open source file</a>
+          </div>
+          <div id="doc-content" class="doc-content"></div>
+        </section>
+      </main>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
