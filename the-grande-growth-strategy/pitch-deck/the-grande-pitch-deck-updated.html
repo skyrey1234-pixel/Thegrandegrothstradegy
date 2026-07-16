@@ -450,7 +450,7 @@
     <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
 
     <div class="slide-counter">
-        <span id="current-slide">1</span> / <span id="total-slides">14</span>
+        <span id="current-slide">1</span> / <span id="total-slides">15</span>
     </div>
 
     <div class="presentation">
@@ -592,6 +592,45 @@
 
             <div class="stat-box" style="margin-top: 30px; text-align: center;">
                 <p style="font-size: 1.3em;"><span class="highlight">TOTAL MONTHLY OPPORTUNITY: $30K–48K in new revenue</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE: Beyond the Website - More Ways I Can Help -->
+    <div class="slide slide-services">
+        <div class="slide-content">
+            <span class="eyebrow">Beyond the Website</span>
+            <h2>More Ways I Can Help</h2>
+            <p style="text-align: center; margin-bottom: 30px; opacity: 0.85;">The website is just the start. This is the boots-on-the-ground playbook that pulls new customers through your door — night after night.</p>
+
+            <div class="grid-2">
+                <div class="stream-card sc1">
+                    <h3>🎟️ Sidewalk Coupon Runners</h3>
+                    <p class="money">Turn their wait into your sale</p>
+                    <p style="font-size: 0.95em;">On packed Friday nights, our staff walk the lines outside Coop 303 &amp; Flying Iguana handing out "Buy One Drink, Get One Free" coupons. People can't drink on the street — so they come wait it out at The Grande. Their wait becomes your revenue.</p>
+                </div>
+
+                <div class="stream-card sc2">
+                    <h3>🚚 Food Trucks &amp; Snacks</h3>
+                    <p class="money">Kill the #1 complaint</p>
+                    <p style="font-size: 0.95em;">"There's no food" is the most common gripe. We fix it with rotating food trucks out front and grab-and-go snacks inside. Guests stay longer, spend more, and stop leaving early to go eat somewhere else.</p>
+                </div>
+
+                <div class="stream-card sc3">
+                    <h3>📱 Social Media Growth Engine</h3>
+                    <p class="money">Feed the algorithm</p>
+                    <p style="font-size: 0.95em;">I work hand-in-hand with your team on the algorithm, self-posting ideas, and a ready-to-go content playbook — Reels, trends, hashtags, and a posting calendar so your feed never goes quiet.</p>
+                </div>
+
+                <div class="stream-card sc4">
+                    <h3>🤝 Local Restaurant Partnerships</h3>
+                    <p class="money">The whole block feeds you</p>
+                    <p style="font-size: 0.95em;">Formal deals with neighboring restaurants: they send their overflow wait-list crowd your way for drinks. You capture 40–60 thirsty customers a night who'd otherwise just be standing outside.</p>
+                </div>
+            </div>
+
+            <div class="stat-box" style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 1.2em;"><span class="highlight">You're not just getting a web guy — you're getting a growth partner who works the street, the socials, and the whole neighborhood.</span></p>
             </div>
         </div>
     </div>
@@ -821,7 +860,7 @@
 
     <script>
         let currentSlide = 1;
-        const totalSlides = 14;
+        const totalSlides = 15;
 
         function showSlide(n) {
             const slides = document.querySelectorAll('.slide');
@@ -839,8 +878,8 @@
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Initialize chart on slide 7
-            if (currentSlide === 7) {
+            // Initialize chart on the projection slide
+            if (currentSlide === 8) {
                 setTimeout(initChart, 100);
             }
         }
